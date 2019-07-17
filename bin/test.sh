@@ -90,7 +90,7 @@ function parse_dir {
 function parse_test_suite {
     SUITE=$1
 
-    case ${SUITE}} in
+    case ${SUITE} in
         ALL )
         ;;
         GdprPlugin-Install | Install )
