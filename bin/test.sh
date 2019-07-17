@@ -96,6 +96,15 @@ function parse_test_suite {
         GdprPlugin-Install | Install )
             SUITE="GdprPlugin-Install"
         ;;
+        GdprPlugin-PrivacyCampaignsAndPreferences | PrivacyCampaignsAndPreferences )
+            SUITE="GdprPlugin-PrivacyCampaignsAndPreferences"
+        ;;
+        GdprPlugin-TextFieldTypesAndReviews | TextFieldTypesAndReviews )
+            SUITE="GdprPlugin-TextFieldTypesAndReviews"
+        ;;
+        GdprPlugin-LapsedInterestDate | LapsedInterestDate )
+            SUITE="GdprPlugin-LapsedInterestDate"
+        ;;
         * )
             echo
             echo "Test Unipart GDPR Plugin... ERROR: invalid test suite name ${SUITE}"
