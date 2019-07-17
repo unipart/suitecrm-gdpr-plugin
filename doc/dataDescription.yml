@@ -1,0 +1,254 @@
+Most_Relevant_Fileds:
+
+  GDPR_1_TFT:
+    title: GDPR - 1 - Text Field Types
+    fields:
+      enabled:
+        type: Checkbox
+        label: Enabled
+        help: Enable the Text Field Type
+        audit: true
+        inline: false
+      bean_type:
+        type: TextField
+        label: Module Name
+        help: The name of the module that we want to monitor
+        required: true
+        audit: true
+        inline: false
+      field_name:
+        type: TextField
+        label: Field Name
+        help: The name of the field that you want to monitor
+        required: true
+        audit: true
+        inline: false
+      name:
+        type: name
+        label: TFT Name
+        help: It is composed by ModuleName_FieldName, for internal use only, DO NOT edi this file if you don't know what you're doing
+        required: true
+        audit: true
+        inline: false
+      description:
+        type: TextArea
+        label: Additional Note
+        help: You can use this field to describe the purpose of this Text Field type, for internal use only
+        required: false
+        audit: false
+        inline: false
+
+  GDPR_2_TFR:
+    title: GDPR - 2 - Text Field Reviews
+    fields:
+      note:
+        type: TextArea
+        label: Additional Note
+        help: Additional note about the text to be reviewd, this field is facultative and for internal use only
+        required: false
+        audit: true
+        inline: false
+      status:
+        type: DropDown
+        label: Status
+        help: The status of the Text Field Review
+        list: gdpr_2_tfr_status_list
+          values: pending|approved|rejected
+        default: pending
+        required: true
+        audit: false
+        inline: false
+      target_id:
+        type: TextField
+        label: Target Id
+        help: The Id of the target module
+        required: true
+        audit: true
+        inline: false
+      name:
+        type: name
+        label: TFR Name
+        help: It is the same of TFT Name, for internal use only, DO NOT edi this file if you don't know what you're doing
+        required: true
+        audit: true
+        inline: false
+      description:
+        type: TextArea
+        label: Full Text Content
+        help: The full text of the field that you need to review
+        required: true
+        audit: true
+        inline: false
+    relationships:
+      GDPR_2_TFR_TO_GDPR_1_TFT: ManyToOne
+      GDPR_2_TFR_TO_Users: ManyToOne
+
+  GDPR_3_PC:
+    title: GDPR - 3 - Privacy Campaigns
+    fields:
+      enabled:
+        type: Checkbox
+        label: Enabled
+        help: Enable the Privacy Campaign
+        audit: true
+        inline: false
+      text:
+        type: TextArea
+        label: Privacy Campaign Text
+        help: The text of the privacy campaign that will be visualised in the public form
+        required: true
+        audit: true
+        inline: false
+      color:
+        type: DropDown
+        label: Color
+        help: The privacy campaign code color
+        list: gdpr_3_pc_color_list
+          values: success,warning,danger,info,primary
+        default: info
+        required: true
+        audit: false
+        inline: false
+      show_modal:
+        type: Checkbox
+        label: Show Modal Help
+        help: If checked, show the modal help
+        audit: false
+        inline: false
+      modal_title:
+        type: TextField
+        label: Modal Title
+        help: The modal help title
+        required: false
+        audit: false
+        inline: false
+      modal_content:
+        type: TextArea
+        label: Modal Content
+        help: The modal help content
+        required: false
+        audit: false
+        inline: false
+      name:
+        type: name
+        label: Privacy Campaign Title
+        help: The title of the privacy campaign that will be visualised in the public form
+        required: true
+        audit: true
+        inline: false
+      description:
+        type: TextArea
+        label: Additional Note
+        help: Privacy Campaign additional note, for internal use only
+        required: false
+        audit: false
+        inline: false
+
+  GDPR_4_PP:
+    title: GDPR - 4 - Privacy Preferences
+    fields:
+      target_type:
+        type: DropDown
+        label: Color
+        help: The type of target for the privacy preferences
+        list: gdpr_4_pp_target_type_list
+          values: Contact|Lead|Account
+        required: true
+        audit: true
+        inline: false
+      privacy_preferences:
+        type: TextArea
+        label: Privacy Preferences
+        help: The whole story of the privacy preferences for this target
+        required: true
+        audit: true
+        inline: false
+      uuid:
+        type: TextField
+        label: Universally Unique Identifier
+        help: This is a random generated id used to create the privacy preferences url
+        required: true
+        audit: true
+        inline: false
+      url:
+        type: TextField
+        label: Url
+        help: The privacy preferences url
+        required: true
+        audit: false
+        inline: false
+      target_id:
+        type: TextField
+        label: Target Id
+        help: The Privacy Preferences Target Id
+        required: true
+        audit: true
+        inline: false
+      name:
+        type: name
+        label: Target Name
+        help: The Privacy Preferences Target Name
+        required: true
+        audit: false
+        inline: false
+      description:
+        type: TextArea
+        label: Additional Note
+        help: Privacy Preferences additional note, for internal use only
+        required: false
+        audit: false
+        inline: false
+    relationships:
+      GDPR_4_PP_TO_Contacts: OneToOne
+      GDPR_4_PP_TO_Leads: OneToOne
+      GDPR_4_PP_TO_GDPR_3_PC: OneToMany
+
+  GDPR_5_LIR:
+    title: GDPR - 5 - Lapsed Interest Reviews
+    fields:
+      status:
+        type: DropDown
+        label: Interest Status
+        help: The Status of the interest based on the time from the acquisition of the opportunity data
+        list: gdpr_5_lir_status_list
+          values: legitimate|nearly_lapsed|lasped
+        required: true
+        audit: true
+        inline: false
+      lapse_date:
+        type: TextField
+        label: Lapse Date
+        help: The Lapse Date, format YYYY-MM-DD
+        required: true
+        audit: true
+        inline: false
+      days_before_lapse:
+        type: TextField
+        label: Days Before Lapse
+        help: The number of days before the interest will lapse
+        required: true
+        audit: false
+        inline: false
+      target_id:
+        type: TextField
+        label: Opportunity Target Id
+        help: The Opportunity Target Id
+        required: true
+        audit: true
+        inline: false
+      name:
+        type: name
+        label: Opportunity Name
+        help: The name of the opportunity related to this interest
+        required: true
+        audit: false
+        inline: false
+      description:
+        type: TextArea
+        label: Additional Note
+        help: Additional note, for internal use only
+        required: false
+        audit: false
+        inline: false
+    relationships:
+      GDPR_5_LIR_TO_Opportunities: OneToOne
