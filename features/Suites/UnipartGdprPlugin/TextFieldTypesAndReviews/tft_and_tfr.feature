@@ -1,0 +1,112 @@
+Feature: Text Field Types and Text Field Reviews
+  In order to allow the review of the text area fields
+  As an admin
+  I need to configure the field that needs to be monitored and reviewed
+
+  Scenario: I successfully create a new TFT with module Lead and field Description
+    Given I am on "/"
+    And I hover over the element "#grouptab_5"
+    And I wait till "30000" or to see "GDPR - 1 - Text Field Types"
+    And I click on "a" with text "GDPR - 1 - Text Field Types"
+    And I wait till "30000" or to see "Create GDPR - 1 - Text Field Types"
+    And I click on "div" with text "Create GDPR - 1 - Text Field Types"
+    And I wait till "30000" or to see "Module Name:*"
+    And I select "Leads" from "bean_type"
+    And I check "enabled"
+    And I fill in the following:
+      |field_name |description|
+      |description|this is a note|
+    When I press "SAVE"
+    Then I wait till "30000" or to see "AUTHORS PANEL"
+    And I should see "LEAD_DESCRIPTION"
+
+  Scenario: I edit the description of my test lead and a TFR will be successfully created with stats pending
+    Given I am on "/index.php?action=ajaxui#ajaxUILoc=index.php%3Fmodule%3DLeads%26action%3Dindex%26parentTab%3DAll"
+    And I wait till "30000" or to see "Miss lead_name lead_last_name"
+    And I click on "a" with contains text "Miss lead_name lead_last_name"
+    And I wait till "30000" or to see "Description:"
+    And I double click on "div[field=description]"
+    And I fill in "description" with "change description first test"
+    And I click on id "inlineEditSaveButton"
+    And I wait till "30000" or to see "change description first test"
+    And I am on "/"
+    And I hover over the element "#grouptab_5"
+    And I wait till "30000" or to see "GDPR - 2 - Text Field Reviews"
+    When I click on "a" with text "GDPR - 2 - Text Field Reviews"
+    Then I wait till "30000" or to see "TFR Name"
+    And I should see "Lead_description Pending Administrator" in element "div.list-view-rounded-corners > table > tbody > tr:first-child"
+
+  Scenario: I successfully edit the status of the last generated TFR to approved
+    Given I am on "/"
+    And I hover over the element "#grouptab_5"
+    And I wait till "30000" or to see "GDPR - 2 - Text Field Reviews"
+    And I click on "a" with text "GDPR - 2 - Text Field Reviews"
+    And I wait till "30000" or to see "TFR Name"
+    And I click on "div.list-view-rounded-corners > table > tbody > tr:first-child span"
+    And I wait till "30000" or to see "Pending"
+    And I select "approved" from "status"
+    And I press "SAVE"
+    And I wait till "30000" or to see "Approved"
+
+  Scenario: I disable the TFT Lead Description, when I edit the description of the test lead then
+  I expect the new TFR will not be created
+    Given I am on "/"
+    And I hover over the element "#grouptab_5"
+    And I wait till "30000" or to see "GDPR - 1 - Text Field Types"
+    And I click on "a" with text "GDPR - 1 - Text Field Types"
+    And I wait till "30000" or to see "Module Name"
+    And I click on "div.list-view-rounded-corners > table > tbody > tr:first-child span"
+    And I wait till "30000" or to see "EDIT"
+    And I click on id "enabled"
+    And I press "SAVE"
+    And I am on "/index.php?action=ajaxui#ajaxUILoc=index.php%3Fmodule%3DLeads%26action%3Dindex%26parentTab%3DAll"
+    And I wait till "30000" or to see "Miss lead_name lead_last_name"
+    And I click on "a" with contains text "Miss lead_name lead_last_name"
+    And I wait till "30000" or to see "Description:"
+    And I double click on "div[field=description]"
+    And I fill in "description" with "change description second test"
+    And I click on id "inlineEditSaveButton"
+    And I wait till "30000" or to see "change description second test"
+    And I am on "/"
+    And I hover over the element "#grouptab_5"
+    And I wait till "30000" or to see "GDPR - 2 - Text Field Reviews"
+    When I click on "a" with text "GDPR - 2 - Text Field Reviews"
+    And I wait till "30000" or to see "TFR Name"
+    Then I should not see "Lead_description Pending Administrator" in element "div.list-view-rounded-corners > table > tbody > tr:first-child"
+
+  Scenario: I enable the TFT Lead Description, when I edit the description of the test lead then
+  I expect a new TFR will be created
+    Given I am on "/"
+    And I hover over the element "#grouptab_5"
+    And I wait till "30000" or to see "GDPR - 1 - Text Field Types"
+    And I click on "a" with text "GDPR - 1 - Text Field Types"
+    And I wait till "30000" or to see "Module Name"
+    And I click on "div.list-view-rounded-corners > table > tbody > tr:first-child span"
+    And I wait till "30000" or to see "EDIT"
+    And I check "enabled"
+    And I press "SAVE"
+    And I am on "/index.php?action=ajaxui#ajaxUILoc=index.php%3Fmodule%3DLeads%26action%3Dindex%26parentTab%3DAll"
+    And I wait till "30000" or to see "Miss lead_name lead_last_name"
+    And I click on "a" with contains text "Miss lead_name lead_last_name"
+    And I wait till "30000" or to see "Description:"
+    And I double click on "div[field=description]"
+    And I fill in "description" with "change description third test"
+    And I click on id "inlineEditSaveButton"
+    And I wait till "30000" or to see "change description third test"
+    And I am on "/"
+    And I hover over the element "#grouptab_5"
+    When I click on "a" with text "GDPR - 2 - Text Field Reviews"
+    And I wait till "30000" or to see "TFR Name"
+    Then I should see "Lead_description Pending Administrator" in element "div.list-view-rounded-corners > table > tbody > tr:first-child"
+    And I should not see "Lead_description Approved Administrator" in element "div.list-view-rounded-corners > table > tbody > tr:first-child"
+
+  Scenario: I successfully edit the status of the last generated TFR to rejected
+    Given I am on "/"
+    And I hover over the element "#grouptab_5"
+    And I click on "a" with text "GDPR - 2 - Text Field Reviews"
+    And I wait till "30000" or to see "TFR Name"
+    And I click on "div.list-view-rounded-corners > table > tbody > tr:first-child span"
+    And I wait till "30000" or to see "Pending"
+    And I select "rejected" from "status"
+    When I press "SAVE"
+    Then I wait till "30000" or to see "Rejected"

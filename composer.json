@@ -1,0 +1,20 @@
+{
+  "name": "unipart/gdpr-plugin",
+  "description": "Unipart GDPR - SuiteCRM Plugin",
+  "version": "1.0.0",
+  "type": "software",
+  "time": "2019-03-14",
+  "authors": [
+    {
+      "name": "Riccardo De Leo",
+      "email": "riccardo.deleo@unipart.io",
+      "homepage": "https://wiki.unipart.io/wiki/Riccardo_De_Leo",
+      "role": "Author"
+    }
+  ],
+  "require": {
+    "php": ">=7",
+    "ext-json": "*"
+  },
+  "minimum-stability": "stable"
+}
